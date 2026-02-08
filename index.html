@@ -17,7 +17,7 @@ body{
   color:#fff;
 }
 
-/* LOGO (tekstualni) */
+/* LOGO */
 .logo{
   position:fixed;
   top:20px;
@@ -57,7 +57,7 @@ body{
   padding:60px 20px;
 }
 
-/* APPS GRID */
+/* GRID */
 .apps{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -71,29 +71,45 @@ body{
   padding:35px 25px;
   text-align:center;
   position:relative;
-  transition:.35s;
+  transition:.4s;
   backdrop-filter:blur(6px);
-  opacity:0;
-  transform:translateY(40px);
-}
-.card.show{
-  opacity:1;
-  transform:translateY(0);
 }
 .card:hover{
   transform:translateY(-10px);
   background:rgba(255,255,255,.14);
 }
 
-/* ICON */
+/* GLOW EFFECT */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:22px;
+  background:linear-gradient(120deg,transparent,#ff4d8d,transparent);
+  opacity:0;
+  transition:.4s;
+  pointer-events:none;
+}
+.card:hover::before{
+  opacity:.25;
+}
+
+/* FLOAT ICON */
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
 .icon{
   font-size:50px;
   margin-bottom:20px;
+  animation:float 3s ease-in-out infinite;
 }
 .card.android .icon{color:#3ddc84}
-.card.ios .icon{color:#ffffff}
+.card.ios .icon{color:#fff}
 .card.windows .icon{color:#00aaff}
 
+/* TEXT */
 .card h3{margin:10px 0}
 .card p{
   font-size:14px;
@@ -101,7 +117,12 @@ body{
   min-height:38px;
 }
 
-/* BUTTON */
+/* PULSE BUTTON */
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(255,77,141,.6)}
+  70%{box-shadow:0 0 0 15px rgba(255,77,141,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,77,141,0)}
+}
 .card a{
   display:inline-block;
   margin-top:20px;
@@ -111,8 +132,10 @@ body{
   color:#fff;
   text-decoration:none;
   font-size:14px;
+  animation:pulse 2.5s infinite;
 }
 .card a i{margin-right:8px}
+.card:hover a{animation:none}
 .card a:hover{background:#ff2f78}
 
 /* BADGE */
@@ -151,10 +174,8 @@ footer span{color:#ff4d8d;font-weight:600}
 
 <body>
 
-<!-- LOGO -->
 <div class="logo">Balkan Media</div>
 
-<!-- HERO -->
 <section class="hero">
   <h1>Balkan Media</h1>
   <p>Sve najbolje aplikacije, alati i tutorijali na jednom mestu.  
@@ -162,7 +183,6 @@ footer span{color:#ff4d8d;font-weight:600}
   <a href="#apps">Preuzmi aplikacije</a>
 </section>
 
-<!-- APPS -->
 <section id="apps" class="container">
   <div class="apps">
 
@@ -192,7 +212,6 @@ footer span{color:#ff4d8d;font-weight:600}
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="social">
     <a href="#"><i class="fab fa-youtube"></i></a>
@@ -201,19 +220,6 @@ footer span{color:#ff4d8d;font-weight:600}
   </div>
   <p>© 2026 <span>Balkan Media</span> • Aplikacije & tutorijali</p>
 </footer>
-
-<!-- SCROLL ANIMATION -->
-<script>
-const cards=document.querySelectorAll('.card');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('show');
-    }
-  });
-},{threshold:0.2});
-cards.forEach(card=>observer.observe(card));
-</script>
 
 </body>
 </html>
