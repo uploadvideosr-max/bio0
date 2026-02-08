@@ -56,13 +56,14 @@ body{
   padding:60px 20px;
 }
 
-/* APPS */
+/* APPS GRID */
 .apps{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:30px;
 }
 
+/* CARD */
 .card{
   background:rgba(255,255,255,.08);
   border-radius:22px;
@@ -74,16 +75,23 @@ body{
   opacity:0;
   transform:translateY(40px);
 }
-
 .card.show{
   opacity:1;
   transform:translateY(0);
 }
-
 .card:hover{
   transform:translateY(-10px);
   background:rgba(255,255,255,.14);
 }
+
+/* PLATFORM ICON */
+.icon{
+  font-size:34px;
+  margin-bottom:10px;
+}
+.card.android .icon{color:#3ddc84}
+.card.ios .icon{color:#ffffff}
+.card.windows .icon{color:#00aaff}
 
 .card img{
   width:90px;
@@ -99,6 +107,7 @@ body{
   min-height:38px;
 }
 
+/* BUTTON */
 .card a{
   display:inline-block;
   margin-top:15px;
@@ -109,6 +118,8 @@ body{
   text-decoration:none;
   font-size:14px;
 }
+.card a i{margin-right:8px}
+.card a:hover{background:#ff2f78}
 
 /* BADGE */
 .badge{
@@ -163,27 +174,33 @@ footer span{color:#ff4d8d;font-weight:600}
 <section id="apps" class="container">
   <div class="apps">
 
-    <div class="card">
+    <!-- ANDROID -->
+    <div class="card android">
       <span class="badge hot">POPULARNO</span>
-      <img src="img/app1.png">
+      <div class="icon"><i class="fab fa-android"></i></div>
+      <img src="img/app1.png" alt="Android App">
       <h3>Android App</h3>
       <p>Najbolja Android aplikacija za Balkan korisnike.</p>
-      <a href="#">Preuzmi</a>
+      <a href="#"><i class="fas fa-download"></i>Preuzmi</a>
     </div>
 
-    <div class="card">
+    <!-- IOS -->
+    <div class="card ios">
       <span class="badge">NOVO</span>
-      <img src="img/app2.png">
+      <div class="icon"><i class="fab fa-apple"></i></div>
+      <img src="img/app2.png" alt="iOS App">
       <h3>iOS App</h3>
       <p>Optimizovana aplikacija za iPhone uređaje.</p>
-      <a href="#">Preuzmi</a>
+      <a href="#"><i class="fas fa-download"></i>Preuzmi</a>
     </div>
 
-    <div class="card">
-      <img src="img/app3.png">
+    <!-- WINDOWS -->
+    <div class="card windows">
+      <div class="icon"><i class="fab fa-windows"></i></div>
+      <img src="img/app3.png" alt="Windows App">
       <h3>Windows App</h3>
       <p>Stabilna desktop aplikacija za Windows.</p>
-      <a href="#">Preuzmi</a>
+      <a href="#"><i class="fas fa-download"></i>Preuzmi</a>
     </div>
 
   </div>
@@ -199,6 +216,7 @@ footer span{color:#ff4d8d;font-weight:600}
   <p>© 2026 <span>Balkan Media</span> • Aplikacije & tutorijali</p>
 </footer>
 
+<!-- SCROLL ANIMATION -->
 <script>
 const cards=document.querySelectorAll('.card');
 const observer=new IntersectionObserver(entries=>{
