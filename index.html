@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Balkan Media</title>
+<title>Balkan Media – Aplikacije</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
@@ -15,204 +15,154 @@ body{
   font-family:'Montserrat',sans-serif;
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:#fff;
+  text-align:center;
 }
 
-/* LOGO ANIMATION */
-@keyframes shine{
-  0%{background-position:-200%}
-  100%{background-position:200%}
-}
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
-
+/* LOGO */
 .logo{
-  position:fixed;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:26px;
+  margin:40px 0 20px;
+  font-size:42px;
   font-weight:700;
   letter-spacing:2px;
-  background:linear-gradient(90deg,#ff4d8d,#ffffff,#ff4d8d);
-  background-size:200%;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shine 5s linear infinite, float 3s ease-in-out infinite;
-  z-index:1000;
+  animation:logoFloat 4s ease-in-out infinite, logoGlow 3s ease-in-out infinite alternate;
+}
+.logo span{
+  color:#ff4d8d;
 }
 
-/* HERO */
-.hero{
-  text-align:center;
-  padding:140px 20px 90px;
+@keyframes logoFloat{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
 }
-.hero h1{font-size:50px;margin-bottom:15px}
-.hero p{
-  max-width:620px;
-  margin:0 auto 30px;
-  opacity:.9;
-  font-size:18px;
+@keyframes logoGlow{
+  from{text-shadow:0 0 10px #ff4d8d}
+  to{text-shadow:0 0 25px #ff4d8d}
 }
-.hero a{
-  background:#ff4d8d;
-  padding:15px 40px;
-  color:#fff;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:600;
-}
-.hero a:hover{background:#ff2f78}
 
 /* CONTAINER */
 .container{
-  max-width:1150px;
+  max-width:1100px;
   margin:auto;
-  padding:60px 20px;
+  padding:20px;
 }
 
-/* GRID */
-.apps{
+/* CARDS */
+.cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
+  gap:25px;
+  margin-top:30px;
 }
-
-/* CARD */
 .card{
-  background:rgba(255,255,255,.08);
+  position:relative;
+  background:rgba(255,255,255,0.08);
   border-radius:22px;
   padding:35px 25px;
-  text-align:center;
-  position:relative;
+  backdrop-filter:blur(10px);
   transition:.4s;
-  backdrop-filter:blur(6px);
+  overflow:hidden;
 }
 .card:hover{
   transform:translateY(-10px);
-  background:rgba(255,255,255,.14);
 }
 
-/* GLOW */
+/* GLOW EFFECT */
 .card::before{
   content:"";
   position:absolute;
   inset:0;
-  border-radius:22px;
   background:linear-gradient(120deg,transparent,#ff4d8d,transparent);
   opacity:0;
   transition:.4s;
 }
-.card:hover::before{opacity:.25}
+.card:hover::before{
+  opacity:.25;
+}
 
-/* ICON FLOAT */
+/* ICON */
 .icon{
-  font-size:50px;
-  margin-bottom:20px;
+  font-size:55px;
+  margin-bottom:15px;
   animation:float 3s ease-in-out infinite;
 }
-.card.android .icon{color:#3ddc84}
-.card.ios .icon{color:#fff}
-.card.windows .icon{color:#00aaff}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
+.card:hover .icon{
+  transform:scale(1.15) rotate(5deg);
+  transition:.4s;
+}
 
-/* TEXT */
-.card h3{margin:10px 0}
-.card p{font-size:14px;opacity:.85}
+/* BUTTON */
+.card a{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 28px;
+  background:#ff4d8d;
+  color:#fff;
+  text-decoration:none;
+  border-radius:30px;
+  font-weight:600;
+  animation:pulse 2.5s infinite;
+}
+.card:hover a{
+  animation:none;
+}
 
-/* PULSE BUTTON */
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(255,77,141,.6)}
   70%{box-shadow:0 0 0 15px rgba(255,77,141,0)}
   100%{box-shadow:0 0 0 0 rgba(255,77,141,0)}
 }
-.card a{
-  display:inline-block;
-  margin-top:20px;
-  padding:12px 30px;
-  background:#ff4d8d;
-  border-radius:25px;
-  color:#fff;
-  text-decoration:none;
-  font-size:14px;
-  animation:pulse 2.5s infinite;
-}
-.card:hover a{animation:none}
-
-/* BADGE */
-.badge{
-  position:absolute;
-  top:18px;
-  left:18px;
-  background:#00e0ff;
-  color:#000;
-  padding:5px 14px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:700;
-}
-.badge.hot{background:#ffb703}
 
 /* FOOTER */
 footer{
-  background:rgba(0,0,0,.3);
-  text-align:center;
-  padding:35px 15px;
-}
-footer span{color:#ff4d8d;font-weight:600}
-
-/* MOBILE */
-@media(max-width:600px){
-  .hero h1{font-size:36px}
-  .logo{font-size:20px}
+  margin:40px 0 20px;
+  font-size:14px;
+  opacity:.7;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGO -->
-<div class="logo">BALKAN MEDIA</div>
+<div class="logo">
+  Balkan <span>Media</span>
+</div>
 
-<section class="hero">
-  <h1>Balkan Media</h1>
-  <p>Sve najbolje aplikacije, alati i tutorijali na jednom mestu.  
-  Brzo • Jednostavno • Besplatno</p>
-  <a href="#apps">Preuzmi aplikacije</a>
-</section>
+<div class="container">
 
-<section id="apps" class="container">
-  <div class="apps">
+  <div class="cards">
 
-    <div class="card android">
-      <span class="badge hot">POPULARNO</span>
+    <div class="card">
       <div class="icon"><i class="fab fa-android"></i></div>
-      <h3>Android App</h3>
-      <p>Najbolja Android aplikacija za Balkan korisnike.</p>
-      <a href="#"><i class="fas fa-download"></i>Preuzmi</a>
+      <h2>Android App</h2>
+      <p>Preuzmite Android aplikaciju brzo i jednostavno.</p>
+      <a href="#">Preuzmi</a>
     </div>
 
-    <div class="card ios">
-      <span class="badge">NOVO</span>
+    <div class="card">
       <div class="icon"><i class="fab fa-apple"></i></div>
-      <h3>iOS App</h3>
+      <h2>iOS App</h2>
       <p>Optimizovana aplikacija za iPhone uređaje.</p>
-      <a href="#"><i class="fas fa-download"></i>Preuzmi</a>
+      <a href="#">Preuzmi</a>
     </div>
 
-    <div class="card windows">
+    <div class="card">
       <div class="icon"><i class="fab fa-windows"></i></div>
-      <h3>Windows App</h3>
-      <p>Stabilna desktop aplikacija za Windows.</p>
-      <a href="#"><i class="fas fa-download"></i>Preuzmi</a>
+      <h2>Windows App</h2>
+      <p>Desktop verzija za Windows računare.</p>
+      <a href="#">Preuzmi</a>
     </div>
 
   </div>
-</section>
+</div>
 
 <footer>
-  <p>© 2026 <span>Balkan Media</span> • Aplikacije & tutorijali</p>
+  © 2026 Balkan Media
 </footer>
 
 </body>
